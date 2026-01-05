@@ -1,5 +1,7 @@
-const express = require('express');
-const routes = express.Router();
+const express = require("express");
+const router = express.Router();
 
-router.get('/health', (req,res) =>{res.status(200).json({status: 'API is running'});});
+router.get("/health", (req, res) => {
+  res.status(200).json({ status: "API is running" });
+});
 module.exports = router;
