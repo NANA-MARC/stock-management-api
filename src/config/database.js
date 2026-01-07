@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 const connectDatabase = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/stock_management", {});
-    console.log("MongoDB connected successfully");
+    const dbUri =
+      process.env.MONGODB_URI || "mongodb://localhost:27017/stockdb";
+    await mongoose.connect(dbUri);
+    console.log("MongoDB connected");
   } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
+    console.error(error);
     process.exit(1);
   }
 };
