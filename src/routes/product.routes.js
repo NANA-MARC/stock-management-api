@@ -56,18 +56,87 @@ router.post(
   authorize("admin", "staff"),
   productController.createProduct
 );
+/**
+ * @swagger
+ * /products/{id}:
+ *   get:
+ *     summary: Get a product by ID
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Product details
+ *       404:
+ *         description: Product not found
+ */
 router.get(
   "/:id",
   protect,
   authorize("admin", "staff"),
   productController.getProductById
 );
+/**
+ * @swagger
+ * /products/{id}:
+ *   put:
+ *     summary: Update a product
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               stockQuantity:
+ *                 type: integer
+ *               category:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Product updated
+ *       404:
+ *         description: Product not found
+ */
 router.put(
   "/:id",
   protect,
   authorize("admin", "manager"),
   productController.updateProduct
 );
+/**
+ * @swagger
+ * /products/{id}:
+ *   delete:
+ *     summary: Delete a product
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Product deleted
+ *       404:
+ *         description: Product not found
+ */
 router.delete(
   "/:id",
   protect,

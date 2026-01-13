@@ -18,6 +18,11 @@ exports.protect = (req, res, next) => {
 exports.authorize =
   (...roles) =>
   (req, res, next) => {
+    if (!req.user || !req.user.role) {
+      return res
+        .status(401)
+        .json({ error: "User not authenticated properly." });
+    }
     if (!roles.includes(req.user.role)) {
       return res
         .status(403)
